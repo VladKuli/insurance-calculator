@@ -4,6 +4,13 @@ public enum RiskLevel {
 
     HIGH,
     MEDIUM,
-    LOW
+    LOW;
 
+    public static RiskLevel fromRiskPoints(long points) {
+        return switch ((int) points) {
+            case 0, 1 -> LOW;
+            case 2 -> MEDIUM;
+            default -> HIGH;
+        };
+    }
 }

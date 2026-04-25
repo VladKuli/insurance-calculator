@@ -4,15 +4,15 @@ import insurance.quote.calculator.core.domain.enums.InsuranceType;
 import insurance.quote.calculator.core.domain.enums.QuoteStatus;
 import insurance.quote.calculator.core.domain.enums.RiskLevel;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "insurance_quote")
 @Getter
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class InsuranceQuote {
 
@@ -37,9 +37,11 @@ public class InsuranceQuote {
     @JoinColumn(name = "price_breakdown_id")
     private PriceBreakdown priceBreakdown;
 
-    private LocalDateTime createdAt;
+    @Builder.Default
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    private LocalDateTime updatedAt;
+    @Builder.Default
+    private LocalDateTime updatedAt = LocalDateTime.now();
 
     public InsuranceQuote(
             InsuranceType insuranceType,

@@ -52,4 +52,11 @@ public class CustomerProfile {
         this.hasChronicDiseases = hasChronicDiseases;
     }
 
+    public CustomerProfile(String firstName, String lastName, Integer age, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.email = email;
+    }
+
 }
