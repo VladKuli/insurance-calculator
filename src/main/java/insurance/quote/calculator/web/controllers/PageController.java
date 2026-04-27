@@ -49,4 +49,19 @@ public class PageController {
         return "quotes/car";
     }
 
+    @PostMapping("/quotes/car/accept")
+    public String acceptCarQuote() {
+        return "redirect:/quotes/car/success";
+    }
+
+    @PostMapping("/quotes/car/reject")
+    public String rejectCarQuote() {
+        return "redirect:/quotes/car";
+    }
+
+    @GetMapping("/quotes/car/success")
+    public String carQuoteSuccessPage() {
+        return "quotes/car-success";
+    }
+
 }

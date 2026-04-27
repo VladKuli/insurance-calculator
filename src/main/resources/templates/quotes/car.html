@@ -236,6 +236,46 @@
         input[type="date"]::-webkit-calendar-picker-indicator:hover {
             opacity: 1;
         }
+
+        .decision-actions {
+            margin-top: 26px;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .accept-button,
+        .reject-button {
+            border: none;
+            border-radius: 14px;
+            padding: 13px 28px;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .accept-button {
+            background: linear-gradient(135deg, #16a34a, #22c55e);
+            box-shadow: 0 12px 28px rgba(34, 197, 94, 0.28);
+        }
+
+        .reject-button {
+            background: linear-gradient(135deg, #dc2626, #f97316);
+            box-shadow: 0 12px 28px rgba(239, 68, 68, 0.28);
+        }
+
+        .accept-button:hover,
+        .reject-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .accept-button:active,
+        .reject-button:active {
+            transform: translateY(0);
+        }
     </style>
 </head>
 
@@ -448,6 +488,21 @@
                     <span class="result-value" th:text="${quoteResponse.priceBreakdown.finalPrice}">1200</span>
                 </div>
             </div>
+
+            <div class="decision-actions">
+                <form th:action="@{/quotes/car/accept}" method="post">
+                    <button class="accept-button" type="submit">
+                        Accept quote
+                    </button>
+                </form>
+
+                <form th:action="@{/quotes/car/reject}" method="post">
+                    <button class="reject-button" type="submit">
+                        Reject quote
+                    </button>
+                </form>
+            </div>
+
         </div>
     </div>
 </div>
