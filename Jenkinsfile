@@ -28,7 +28,7 @@ pipeline {
 
         stage('Deploy to Render') {
             when {
-                branch 'main'
+                branch 'master'
             }
             steps {
                 withCredentials([string(credentialsId: 'render-deploy-hook', variable: 'RENDER_DEPLOY_HOOK')]) {
