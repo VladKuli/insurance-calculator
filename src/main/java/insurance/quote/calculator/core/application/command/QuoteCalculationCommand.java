@@ -1,9 +1,8 @@
 package insurance.quote.calculator.core.application.command;
 
 import insurance.quote.calculator.core.domain.CustomerProfile;
+import insurance.quote.calculator.core.domain.enums.CoverageLevel;
 import insurance.quote.calculator.core.domain.enums.InsuranceType;
-
-import java.math.BigDecimal;
 
 public interface QuoteCalculationCommand {
 
@@ -11,6 +10,6 @@ public interface QuoteCalculationCommand {
 
     CustomerProfile customerProfile();
 
-    BigDecimal coverageAmount();
+    CoverageLevel coverageAmount();
 
 }

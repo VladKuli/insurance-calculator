@@ -31,7 +31,10 @@ public class CarRiskAssessmentServiceImpl implements RiskAssessmentService {
     }
 
     private Boolean isYoungDriver(CarQuoteCalculationCommand command) {
-        return command.customerProfile().getAge() < 25;
+        return command
+                .customerProfile()
+                .getDateOfBirth()
+                .isAfter(command.customerProfile().getDateOfBirth().plusYears(25));
     }
 
     private Boolean isOldCar(CarQuoteCalculationCommand command) {

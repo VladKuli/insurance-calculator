@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Insurance Quote</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Inter, Arial, sans-serif;
+            background:
+                    radial-gradient(circle at top left, rgba(59, 130, 246, 0.25), transparent 35%),
+                    linear-gradient(135deg, #071426 0%, #0b1f3a 45%, #102a4c 100%);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 16px;
+        }
+
+        .insurance-wrapper {
+            width: 100%;
+            max-width: 780px;
+        }
+
+        .insurance-card {
+            background: rgba(8, 24, 48, 0.88);
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            border-radius: 28px;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(16px);
+            padding: 40px;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .form-badge {
+            display: inline-block;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(96, 165, 250, 0.14);
+            color: #93c5fd;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        .form-header h1 {
+            margin: 0 0 10px;
+            font-size: 32px;
+            line-height: 1.2;
+        }
+
+        .form-header p {
+            margin: 0;
+            color: #cbd5e1;
+            font-size: 16px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        input,
+        select {
+            width: 100%;
+            border: 1px solid rgba(148, 163, 184, 0.28);
+            border-radius: 14px;
+            background: rgba(15, 35, 65, 0.95);
+            color: #ffffff;
+            padding: 14px 16px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        input::placeholder {
+            color: #94a3b8;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.16);
+            background: rgba(18, 45, 82, 1);
+        }
+
+        .error {
+            color: #fca5a5;
+            font-size: 13px;
+            margin-top: 2px;
+        }
+
+        .actions {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .submit-button {
+            border: none;
+            border-radius: 16px;
+            padding: 15px 34px;
+            background: linear-gradient(135deg, #2563eb, #38bdf8);
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 14px 30px rgba(37, 99, 235, 0.35);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 38px rgba(37, 99, 235, 0.45);
+        }
+
+        .submit-button:active {
+            transform: translateY(0);
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 18px;
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+        .result-card {
+            margin-top: 28px;
+            padding: 24px;
+            border-radius: 22px;
+            background: rgba(15, 35, 65, 0.92);
+            border: 1px solid rgba(96, 165, 250, 0.25);
+        }
+
+        .result-card h2 {
+            margin: 0 0 18px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .result-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+        }
+
+        .result-row:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            color: #cbd5e1;
+        }
+
+        .result-value {
+            font-weight: 700;
+            color: #ffffff;
+            text-align: right;
+        }
+
+        @media (max-width: 680px) {
+            .insurance-card {
+                padding: 28px 20px;
+                border-radius: 22px;
+            }
+
+            .form-header h1 {
+                font-size: 26px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .result-row {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .result-value {
+                text-align: left;
+            }
+        }
+
+        .date-input-wrapper {
+            position: relative;
+        }
+
+        input[type="date"] {
+            color-scheme: dark;
+            cursor: pointer;
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+            opacity: 0.85;
+            filter: invert(1);
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+<div class="insurance-wrapper">
+    <div class="insurance-card">
+        <div class="form-header">
+            <div class="form-badge">Car Insurance</div>
+            <h1>Calculate Car Insurance Quote</h1>
+            <p>Fill in customer and car details to get the final insurance price</p>
+        </div>
+
+        <form th:action="@{/quotes/car}"
+              th:object="${carQuoteRequestForm}"
+              method="post">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="firstName">First name</label>
+                    <input
+                            id="firstName"
+                            type="text"
+                            th:field="*{firstName}"
+                            placeholder="Alex">
+                    <div class="error"
+                         th:if="${#fields.hasErrors('firstName')}"
+                         th:errors="*{firstName}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Last name</label>
+                    <input
+                            id="lastName"
+                            type="text"
+                            th:field="*{lastName}"
+                            placeholder="Johnson">
+                    <div class="error"
+                         th:if="${#fields.hasErrors('lastName')}"
+                         th:errors="*{lastName}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input
+                            id="email"
+                            type="email"
+                            th:field="*{email}"
+                            placeholder="alex@example.com">
+                    <div class="error"
+                         th:if="${#fields.hasErrors('email')}"
+                         th:errors="*{email}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phoneNumber">Phone number</label>
+                    <input
+                            id="phoneNumber"
+                            type="tel"
+                            th:field="*{phoneNumber}"
+                            placeholder="+371 20000000">
+                    <div class="error"
+                         th:if="${#fields.hasErrors('phoneNumber')}"
+                         th:errors="*{phoneNumber}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dateOfBirth">Date of birth</label>
+                    <div class="date-input-wrapper">
+                        <input
+                                id="dateOfBirth"
+                                type="date"
+                                th:field="*{dateOfBirth}">
+                    </div>
+                    <div class="error"
+                         th:if="${#fields.hasErrors('dateOfBirth')}"
+                         th:errors="*{dateOfBirth}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="coverageLevel">Coverage level</label>
+
+                    <select id="coverageLevel" th:field="*{coverageLevel}">
+                        <option value="">Select coverage level</option>
+
+                        <option th:each="level : ${T(insurance.quote.calculator.core.domain.enums.CoverageLevel).values()}"
+                                th:value="${level}"
+                                th:text="${level.displayName}">
+                            Basic
+                        </option>
+                    </select>
+
+                    <div class="error"
+                         th:if="${#fields.hasErrors('coverageLevel')}"
+                         th:errors="*{coverageLevel}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="drivingExperienceYears">Driving experience years</label>
+                    <input
+                            id="drivingExperienceYears"
+                            type="number"
+                            th:field="*{drivingExperienceYears}"
+                            placeholder="5"
+                            min="0">
+                    <div class="error"
+                         th:if="${#fields.hasErrors('drivingExperienceYears')}"
+                         th:errors="*{drivingExperienceYears}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="carValue">Car value</label>
+                    <input
+                            id="carValue"
+                            type="number"
+                            step="0.01"
+                            th:field="*{carValue}"
+                            placeholder="25000">
+                    <div class="error"
+                         th:if="${#fields.hasErrors('carValue')}"
+                         th:errors="*{carValue}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="accidentCount">Accident count</label>
+                    <input
+                            id="accidentCount"
+                            type="number"
+                            th:field="*{accidentCount}"
+                            placeholder="0"
+                            min="0">
+                    <div class="error"
+                         th:if="${#fields.hasErrors('accidentCount')}"
+                         th:errors="*{accidentCount}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="carAge">Car age</label>
+                    <input
+                            id="carAge"
+                            type="number"
+                            th:field="*{carAge}"
+                            placeholder="3"
+                            min="0">
+                    <div class="error"
+                         th:if="${#fields.hasErrors('carAge')}"
+                         th:errors="*{carAge}">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="actions">
+                <button class="submit-button" type="submit">
+                    Calculate quote
+                </button>
+            </div>
+
+            <div class="footer-note">
+                The quote is calculated based on customer age, coverage amount, car value, driving experience and accident history.
+            </div>
+        </form>
+
+        <div class="result-card" th:if="${quoteResponse != null}">
+            <h2>Quote result</h2>
+
+            <div class="result-grid">
+
+                <div class="result-row">
+                    <span class="result-label">Insurance type</span>
+                    <span class="result-value" th:text="${quoteResponse.insuranceType}">CAR</span>
+                </div>
+
+                <div class="result-row">
+                    <span class="result-label">Customer</span>
+                    <span class="result-value" th:text="${quoteResponse.customerName}">Alex Johnson</span>
+                </div>
+
+                <div class="result-row">
+                    <span class="result-label">Risk level</span>
+                    <span class="result-value" th:text="${quoteResponse.riskLevel}">LOW</span>
+                </div>
+
+                <div class="result-row">
+                    <span class="result-label">Status</span>
+                    <span class="result-value" th:text="${quoteResponse.status}">CALCULATED</span>
+                </div>
+
+                <div class="result-row" th:if="${quoteResponse.priceBreakdown != null}">
+                    <span class="result-label">Base price</span>
+                    <span class="result-value" th:text="${quoteResponse.priceBreakdown.basePrice}">1000</span>
+                </div>
+
+                <div class="result-row" th:if="${quoteResponse.priceBreakdown != null}">
+                    <span class="result-label">Risk multiplier</span>
+                    <span class="result-value" th:text="${quoteResponse.priceBreakdown.riskMultiplier}">1.2</span>
+                </div>
+
+                <div class="result-row" th:if="${quoteResponse.priceBreakdown != null}">
+                    <span class="result-label">Final price</span>
+                    <span class="result-value" th:text="${quoteResponse.priceBreakdown.finalPrice}">1200</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
