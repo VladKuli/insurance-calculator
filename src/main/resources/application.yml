@@ -1,13 +1,15 @@
 server:
   port: 8081
 spring:
+  config:
+    import: optional:file:.env[.properties]
   application:
     name: insurance-quote-calculator
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/insurance_calculator
-    username: insurance_admin
-    password: admin
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
   jpa:
