@@ -27,9 +27,6 @@ pipeline {
         }
 
         stage('Deploy to Render') {
-            when {
-                branch 'master'
-            }
             steps {
                 withCredentials([string(credentialsId: 'render-deploy-hook', variable: 'RENDER_DEPLOY_HOOK')]) {
                     sh 'curl -X POST "$RENDER_DEPLOY_HOOK"'
