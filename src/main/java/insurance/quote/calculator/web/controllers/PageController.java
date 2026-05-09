@@ -15,53 +15,9 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class PageController {
 
-    private final QuoteCalculationService quoteCalculationService;
-    private final QuoteRequestFormMapperFactory mapperFactory;
-    private final QuoteResponseMapper quoteResponseMapper;
-
     @GetMapping("/")
     public String homePage() {
         return "index";
-    }
-
-    @GetMapping("/quotes/car")
-    public String carQuotePage(Model model) {
-        model.addAttribute("carQuoteRequestForm", new CarQuoteRequestForm());
-        return "quotes/car";
-    }
-
-    @PostMapping("/quotes/car")
-    public String calculateCarQuote(
-            @Valid @ModelAttribute("carQuoteRequestForm") CarQuoteRequestForm form,
-            BindingResult bindingResult,
-            Model model
-    ) {
-        if (bindingResult.hasErrors()) {
-            return "quotes/car";
-        }
-
-        var command = mapperFactory.toCommand(form);
-        var quote = quoteCalculationService.calculateQuote(command);
-        var response = quoteResponseMapper.toResponse(quote);
-
-        model.addAttribute("quoteResponse", response);
-
-        return "quotes/car";
-    }
-
-    @PostMapping("/quotes/car/accept")
-    public String acceptCarQuote() {
-        return "redirect:/quotes/car/success";
-    }
-
-    @PostMapping("/quotes/car/reject")
-    public String rejectCarQuote() {
-        return "redirect:/quotes/car";
-    }
-
-    @GetMapping("/quotes/car/success")
-    public String carQuoteSuccessPage() {
-        return "quotes/car-success";
     }
 
 }

@@ -19,6 +19,7 @@ public abstract class QuoteRequestForm {
 
     @NotNull(message = "Date of birth is required")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @Past(message = "Date of birth must be in the past")
     private LocalDate dateOfBirth;
 
     @NotBlank(message = "Email is required")

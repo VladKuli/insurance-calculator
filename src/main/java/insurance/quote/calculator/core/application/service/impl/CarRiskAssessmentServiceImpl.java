@@ -3,6 +3,7 @@ package insurance.quote.calculator.core.application.service.impl;
 import insurance.quote.calculator.core.application.command.CarQuoteCalculationCommand;
 import insurance.quote.calculator.core.application.command.QuoteCalculationCommand;
 import insurance.quote.calculator.core.application.service.RiskAssessmentService;
+import insurance.quote.calculator.core.domain.enums.InsuranceType;
 import insurance.quote.calculator.core.domain.enums.RiskLevel;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +11,11 @@ import java.util.stream.Stream;
 
 @Component
 public class CarRiskAssessmentServiceImpl implements RiskAssessmentService {
+
+    @Override
+    public Boolean supports(InsuranceType insuranceType) {
+        return insuranceType == InsuranceType.CAR;
+    }
 
     @Override
     public RiskLevel assessRisk(QuoteCalculationCommand command) {

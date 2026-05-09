@@ -10,19 +10,21 @@ import insurance.quote.calculator.core.infrastructure.QuoteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class QuoteCalculationServiceImpl implements QuoteCalculationService {
 
     private final PricingStrategyFactory pricingStrategyFactory;
     private final QuoteRepository quoteRepository;
-    private final RiskAssessmentService riskAssessmentService;
+    private final List<RiskAssessmentService> riskAssessmentServices;
 
     @Override
     public InsuranceQuote calculateQuote(QuoteCalculationCommand command) {
         var pricingStrategy = pricingStrategyFactory.getStrategy(command.getInsuranceType());
         var priceBreakdown = pricingStrategy.calculatePrice(command);
-        var risk = riskAssessmentService.assessRisk(command);
+        var risk = getRiskAssessmentService(command).assessRisk(command);
 
         var quote = InsuranceQuote.builder()
                 .insuranceType(command.getInsuranceType())
@@ -33,6 +35,14 @@ public class QuoteCalculationServiceImpl implements QuoteCalculationService {
                 .build();
 
         return quoteRepository.save(quote);
+    }
+
+    private RiskAssessmentService getRiskAssessmentService(QuoteCalculationCommand command) {
+        return riskAssessmentServices.stream()
+                .filter(service -> service.supports(command.getInsuranceType()))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("No risk assessment service found for insurance type: "
+                        + command.getInsuranceType()));
     }
 
 }

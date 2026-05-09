@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 
 import static insurance.quote.calculator.core.domain.enums.Charges.ACCIDENT_CHARGE;
 import static insurance.quote.calculator.core.domain.enums.Charges.OLD_CAR_CHARGE;
@@ -20,7 +21,7 @@ import static insurance.quote.calculator.core.domain.enums.Charges.OLD_CAR_CHARG
 @RequiredArgsConstructor
 public class CarInsurancePricingStrategy implements PricingStrategy {
 
-    private final RiskAssessmentService riskAssessmentService;
+    private final List<RiskAssessmentService> riskAssessmentServices;
 
     private static final BigDecimal ZERO = BigDecimal.ZERO;
 
@@ -35,8 +36,7 @@ public class CarInsurancePricingStrategy implements PricingStrategy {
             throw new IllegalArgumentException("Car pricing requires car quote command");
         }
 
-        var risk = riskAssessmentService.assessRisk(carCommand);
-
+        var risk = getRiskAssessmentService(command).assessRisk(carCommand);
         var basePrice = calculateBasePrice(carCommand);
         var riskMultiplier = risk.getMultiplier();
         var coverageMultiplier = calculateCoverageMultiplier(carCommand);
@@ -114,6 +114,14 @@ public class CarInsurancePricingStrategy implements PricingStrategy {
         }
 
         return ZERO;
+    }
+
+    private RiskAssessmentService getRiskAssessmentService(QuoteCalculationCommand command) {
+        return riskAssessmentServices.stream()
+                .filter(service -> service.supports(command.getInsuranceType()))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("No risk assessment service found for insurance type: "
+                        + command.getInsuranceType()));
     }
 
 }

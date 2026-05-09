@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Real Estate Quote Accepted</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Inter, Arial, sans-serif;
+            background:
+                    radial-gradient(circle at top left, rgba(34, 197, 94, 0.22), transparent 35%),
+                    radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.18), transparent 38%),
+                    linear-gradient(135deg, #071426 0%, #0b1f3a 45%, #102a4c 100%);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 16px;
+        }
+
+        .success-wrapper {
+            width: 100%;
+            max-width: 650px;
+        }
+
+        .success-card {
+            text-align: center;
+            background: rgba(8, 24, 48, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            border-radius: 28px;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(16px);
+            padding: 46px 38px;
+        }
+
+        .success-icon {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(74, 222, 128, 0.35);
+            color: #4ade80;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            font-weight: 800;
+            margin: 0 auto 24px;
+            box-shadow: 0 14px 34px rgba(34, 197, 94, 0.18);
+        }
+
+        .success-badge {
+            display: inline-block;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(96, 165, 250, 0.14);
+            color: #93c5fd;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            border: 1px solid rgba(147, 197, 253, 0.16);
+        }
+
+        h1 {
+            margin: 0 0 14px;
+            font-size: 34px;
+            line-height: 1.2;
+        }
+
+        p {
+            margin: 0 auto;
+            max-width: 520px;
+            color: #cbd5e1;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .info-box {
+            margin-top: 28px;
+            padding: 20px;
+            border-radius: 20px;
+            background: rgba(15, 35, 65, 0.82);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            color: #cbd5e1;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .actions {
+            margin-top: 32px;
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .primary-button,
+        .secondary-button {
+            text-decoration: none;
+            border-radius: 15px;
+            padding: 14px 28px;
+            font-size: 15px;
+            font-weight: 800;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .primary-button {
+            background: linear-gradient(135deg, #2563eb, #38bdf8);
+            color: #ffffff;
+            box-shadow: 0 14px 30px rgba(37, 99, 235, 0.35);
+        }
+
+        .secondary-button {
+            color: #e2e8f0;
+            border: 1px solid rgba(148, 163, 184, 0.28);
+            background: rgba(15, 35, 65, 0.8);
+        }
+
+        .primary-button:hover,
+        .secondary-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .secondary-button:hover {
+            border-color: rgba(96, 165, 250, 0.55);
+            box-shadow: 0 14px 30px rgba(15, 23, 42, 0.25);
+        }
+
+        @media (max-width: 560px) {
+            .success-card {
+                padding: 36px 22px;
+                border-radius: 24px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+
+            .primary-button,
+            .secondary-button {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="success-wrapper">
+    <div class="success-card">
+        <div class="success-icon">✓</div>
+
+        <div class="success-badge">Real Estate Insurance</div>
+
+        <h1>Quote accepted</h1>
+
+        <p>
+            Thank you! Your real estate insurance request has been accepted.
+            Our employee will contact you in the near future.
+        </p>
+
+        <div class="info-box">
+            We will review your property details, coverage level and calculated quote.
+            After that, our specialist will contact you to continue the insurance process.
+        </div>
+
+        <div class="actions">
+            <a class="primary-button" th:href="@{/}">
+                Back to home
+            </a>
+
+            <a class="secondary-button" th:href="@{/quotes/real-estate}">
+                Calculate another quote
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

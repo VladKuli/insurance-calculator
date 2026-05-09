@@ -7,7 +7,7 @@ public enum InsuranceType {
 
     TRAVEL("Travel"),
     CAR("Car"),
-    HEALTH("Health");
+    REAL_ESTATE("Real Estate");
 
     private final String value;
 

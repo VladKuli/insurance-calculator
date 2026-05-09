@@ -288,13 +288,17 @@
             <h1>Calculate your insurance quote quickly and easily</h1>
 
             <p class="hero-description">
-                Choose an insurance type, fill in a simple form and get an estimated quote based on customer details,
-                coverage level and risk factors.
+                Choose car or real estate insurance, fill in a simple form and get an estimated quote based on
+                customer details, coverage level and risk factors.
             </p>
 
             <div class="hero-actions">
                 <a class="primary-button" th:href="@{/quotes/car}">
                     Calculate car quote
+                </a>
+
+                <a class="secondary-button" th:href="@{/quotes/real-estate}">
+                    Calculate real estate quote
                 </a>
 
                 <a class="secondary-button" href="#insurance-types">
@@ -318,6 +322,18 @@
                 </a>
             </div>
 
+            <div class="insurance-card">
+                <div class="card-icon">🏠</div>
+                <h3>Real Estate Insurance</h3>
+                <p>
+                    Calculate a real estate insurance quote based on property value,
+                    property age, customer details and selected coverage level.
+                </p>
+                <a class="card-link" th:href="@{/quotes/real-estate}">
+                    Start calculation →
+                </a>
+            </div>
+
             <div class="insurance-card disabled">
                 <div class="card-icon">✈️</div>
                 <h3>Travel Insurance</h3>
@@ -327,22 +343,12 @@
                 </p>
                 <span class="coming-soon">Coming soon</span>
             </div>
-
-            <div class="insurance-card disabled">
-                <div class="card-icon">🏠</div>
-                <h3>Home Insurance</h3>
-                <p>
-                    Home insurance quote calculation will be available later.
-                    It can include property value, location and coverage type.
-                </p>
-                <span class="coming-soon">Coming soon</span>
-            </div>
         </div>
 
         <div class="features">
             <div class="feature-item">
-                <strong>Simple forms</strong>
-                Clean and user-friendly pages built with Thymeleaf.
+                <strong>Multiple quote types</strong>
+                Calculate car and real estate insurance quotes from separate Thymeleaf forms.
             </div>
 
             <div class="feature-item">
