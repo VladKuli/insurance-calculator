@@ -16,11 +16,15 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: validate
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
-        format_sql: true
+        format_sql: false
 
   flyway:
     enabled: true
     locations: classpath:db/migration
+
+logging:
+  level:
+    org.hibernate.orm.connections.pooling: WARN

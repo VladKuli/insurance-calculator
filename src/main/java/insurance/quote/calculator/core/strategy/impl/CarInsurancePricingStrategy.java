@@ -2,7 +2,7 @@ package insurance.quote.calculator.core.strategy.impl;
 
 import insurance.quote.calculator.core.application.command.CarQuoteCalculationCommand;
 import insurance.quote.calculator.core.application.command.QuoteCalculationCommand;
-import insurance.quote.calculator.core.application.service.RiskAssessmentService;
+import insurance.quote.calculator.core.application.service.risk_assessment.RiskAssessmentService;
 import insurance.quote.calculator.core.domain.PriceBreakdown;
 import insurance.quote.calculator.core.domain.enums.Discounts;
 import insurance.quote.calculator.core.domain.enums.InsuranceType;
@@ -77,7 +77,7 @@ public class CarInsurancePricingStrategy implements PricingStrategy {
     }
 
     private BigDecimal calculateCoverageMultiplier(CarQuoteCalculationCommand command) {
-        return command.coverageAmount()
+        return command.coverageLevel()
                 .getMultiplier()
                 .setScale(2, RoundingMode.HALF_UP);
     }

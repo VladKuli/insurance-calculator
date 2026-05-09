@@ -1,9 +1,8 @@
 package insurance.quote.calculator.core.strategy.impl;
 
-import insurance.quote.calculator.core.application.command.CarQuoteCalculationCommand;
 import insurance.quote.calculator.core.application.command.QuoteCalculationCommand;
 import insurance.quote.calculator.core.application.command.RealEstateQuoteCalculationCommand;
-import insurance.quote.calculator.core.application.service.RiskAssessmentService;
+import insurance.quote.calculator.core.application.service.risk_assessment.RiskAssessmentService;
 import insurance.quote.calculator.core.domain.PriceBreakdown;
 import insurance.quote.calculator.core.domain.enums.CoverageLevel;
 import insurance.quote.calculator.core.domain.enums.InsuranceType;

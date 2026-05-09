@@ -195,24 +195,6 @@
             font-size: 15px;
         }
 
-        .disabled {
-            opacity: 0.58;
-        }
-
-        .disabled:hover {
-            transform: none;
-            box-shadow: none;
-            border-color: rgba(148, 163, 184, 0.2);
-        }
-
-        .coming-soon {
-            display: inline-block;
-            margin-top: 22px;
-            color: #94a3b8;
-            font-weight: 700;
-            font-size: 15px;
-        }
-
         .features {
             position: relative;
             z-index: 1;
@@ -288,7 +270,7 @@
             <h1>Calculate your insurance quote quickly and easily</h1>
 
             <p class="hero-description">
-                Choose car or real estate insurance, fill in a simple form and get an estimated quote based on
+                Choose car, real estate or health insurance, fill in a simple form and get an estimated quote based on
                 customer details, coverage level and risk factors.
             </p>
 
@@ -301,8 +283,8 @@
                     Calculate real estate quote
                 </a>
 
-                <a class="secondary-button" href="#insurance-types">
-                    View insurance types
+                <a class="secondary-button" th:href="@{/quotes/health}">
+                    Calculate health quote
                 </a>
             </div>
         </div>
@@ -334,21 +316,23 @@
                 </a>
             </div>
 
-            <div class="insurance-card disabled">
-                <div class="card-icon">✈️</div>
-                <h3>Travel Insurance</h3>
+            <div class="insurance-card">
+                <div class="card-icon">❤️</div>
+                <h3>Health Insurance</h3>
                 <p>
-                    Travel insurance quote calculation will be available later.
-                    It can include destination, trip duration and traveler details.
+                    Calculate a health insurance quote based on medical conditions,
+                    selected benefits, annual coverage limit and previous claims.
                 </p>
-                <span class="coming-soon">Coming soon</span>
+                <a class="card-link" th:href="@{/quotes/health}">
+                    Start calculation →
+                </a>
             </div>
         </div>
 
         <div class="features">
             <div class="feature-item">
                 <strong>Multiple quote types</strong>
-                Calculate car and real estate insurance quotes from separate Thymeleaf forms.
+                Calculate car, real estate and health insurance quotes from separate Thymeleaf forms.
             </div>
 
             <div class="feature-item">

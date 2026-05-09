@@ -1,4 +1,4 @@
-package insurance.quote.calculator.web.mapper.request;
+package insurance.quote.calculator.web.mapper.request.factory;
 
 import insurance.quote.calculator.core.application.command.QuoteCalculationCommand;
 import insurance.quote.calculator.web.dto.form.QuoteRequestForm;

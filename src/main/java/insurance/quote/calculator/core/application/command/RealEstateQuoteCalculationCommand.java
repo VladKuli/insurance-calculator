@@ -35,7 +35,7 @@ public record RealEstateQuoteCalculationCommand(
     }
 
     @Override
-    public CoverageLevel coverageAmount() {
+    public CoverageLevel coverageLevel() {
         return coverageLevel;
     }
 

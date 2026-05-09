@@ -1,10 +1,10 @@
-package insurance.quote.calculator.web.mapper.request.impl;
+package insurance.quote.calculator.web.mapper.request.factory.impl;
 
 import insurance.quote.calculator.core.application.command.QuoteCalculationCommand;
 import insurance.quote.calculator.core.domain.enums.InsuranceType;
 import insurance.quote.calculator.web.dto.form.QuoteRequestForm;
 import insurance.quote.calculator.web.mapper.request.QuoteRequestFormMapper;
-import insurance.quote.calculator.web.mapper.request.QuoteRequestFormMapperFactory;
+import insurance.quote.calculator.web.mapper.request.factory.QuoteRequestFormMapperFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

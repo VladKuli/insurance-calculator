@@ -1,8 +1,8 @@
-package insurance.quote.calculator.core.application.service.impl;
+package insurance.quote.calculator.core.application.service.quote_calculation.impl;
 
 import insurance.quote.calculator.core.application.command.QuoteCalculationCommand;
-import insurance.quote.calculator.core.application.service.QuoteCalculationService;
-import insurance.quote.calculator.core.application.service.RiskAssessmentService;
+import insurance.quote.calculator.core.application.service.quote_calculation.QuoteCalculationService;
+import insurance.quote.calculator.core.application.service.risk_assessment.RiskAssessmentService;
 import insurance.quote.calculator.core.domain.InsuranceQuote;
 import insurance.quote.calculator.core.domain.enums.QuoteStatus;
 import insurance.quote.calculator.core.factory.PricingStrategyFactory;

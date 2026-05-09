@@ -5,32 +5,51 @@ import insurance.quote.calculator.core.domain.enums.CoverageLevel;
 import insurance.quote.calculator.core.domain.enums.InsuranceType;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 
 import java.math.BigDecimal;
 
-public record CarQuoteCalculationCommand(
+public record HealthQuoteCalculationCommand(
 
         @NotNull
         CustomerProfile customerProfile,
 
         @NotNull
-        CoverageLevel coverageAmount,
+        CoverageLevel coverageLevel,
 
         @NotNull
-        Integer drivingExperienceYears,
+        @PositiveOrZero
+        Integer preExistingConditionCount,
 
         @NotNull
-        BigDecimal carValue,
+        @PositiveOrZero
+        Integer chronicDiseaseCount,
 
         @NotNull
-        Integer accidentCount,
+        Boolean smoker,
 
         @NotNull
-        Integer carAge) implements QuoteCalculationCommand {
+        Boolean includesDental,
+
+        @NotNull
+        Boolean includesVision,
+
+        @NotNull
+        Boolean includesHospitalization,
+
+        @NotNull
+        @Positive
+        BigDecimal annualCoverageLimit,
+
+        @NotNull
+        @PositiveOrZero
+        Integer previousClaimsCount
+
+) implements QuoteCalculationCommand {
 
     @Override
     public InsuranceType getInsuranceType() {
-        return InsuranceType.CAR;
+        return InsuranceType.HEALTH;
     }
 
     @Override
@@ -40,7 +59,7 @@ public record CarQuoteCalculationCommand(
 
     @Override
     public CoverageLevel coverageLevel() {
-        return coverageAmount;
+        return coverageLevel;
     }
 
 }

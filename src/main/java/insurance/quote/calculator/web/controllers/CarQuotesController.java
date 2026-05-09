@@ -1,8 +1,8 @@
 package insurance.quote.calculator.web.controllers;
 
-import insurance.quote.calculator.core.application.service.QuoteCalculationService;
+import insurance.quote.calculator.core.application.service.quote_calculation.QuoteCalculationService;
 import insurance.quote.calculator.web.dto.form.CarQuoteRequestForm;
-import insurance.quote.calculator.web.mapper.request.QuoteRequestFormMapperFactory;
+import insurance.quote.calculator.web.mapper.request.factory.QuoteRequestFormMapperFactory;
 import insurance.quote.calculator.web.mapper.response.QuoteResponseMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequiredArgsConstructor
-public class CarQuotes {
+public class CarQuotesController {
 
     private final QuoteCalculationService quoteCalculationService;
     private final QuoteRequestFormMapperFactory mapperFactory;
@@ -48,6 +48,7 @@ public class CarQuotes {
 
     @PostMapping("/quotes/car/accept")
     public String acceptCarQuote() {
+
         return "redirect:/quotes/car/success";
     }
 

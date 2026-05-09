@@ -1,4 +1,4 @@
-package insurance.quote.calculator.core.application.service;
+package insurance.quote.calculator.core.application.service.risk_assessment;
 
 import insurance.quote.calculator.core.application.command.QuoteCalculationCommand;
 import insurance.quote.calculator.core.domain.enums.InsuranceType;

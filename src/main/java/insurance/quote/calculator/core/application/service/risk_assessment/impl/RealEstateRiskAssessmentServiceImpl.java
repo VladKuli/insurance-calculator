@@ -1,8 +1,8 @@
-package insurance.quote.calculator.core.application.service.impl;
+package insurance.quote.calculator.core.application.service.risk_assessment.impl;
 
 import insurance.quote.calculator.core.application.command.QuoteCalculationCommand;
 import insurance.quote.calculator.core.application.command.RealEstateQuoteCalculationCommand;
-import insurance.quote.calculator.core.application.service.RiskAssessmentService;
+import insurance.quote.calculator.core.application.service.risk_assessment.RiskAssessmentService;
 import insurance.quote.calculator.core.domain.enums.InsuranceType;
 import insurance.quote.calculator.core.domain.enums.RiskLevel;
 import org.springframework.stereotype.Service;

@@ -10,6 +10,6 @@ public interface QuoteCalculationCommand {
 
     CustomerProfile customerProfile();
 
-    CoverageLevel coverageAmount();
+    CoverageLevel coverageLevel();
 
 }

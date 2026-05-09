@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum InsuranceType {
 
-    TRAVEL("Travel"),
+    HEALTH("Health"),
     CAR("Car"),
     REAL_ESTATE("Real Estate");
 
